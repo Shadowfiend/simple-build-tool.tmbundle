@@ -67,7 +67,7 @@
               ("prepare-webapp" ((tell-sbt) prepareWebapp:NO))
               ("~jetty-restart" ((tell-sbt) jettyRestart:YES))
               ("~prepare-webapp" ((tell-sbt) prepareWebapp:YES))
-              (else (ex-command message:(+ "Unrecognized argument " arg ".")))))))))
+              (else (ex-command message:(+ "Unrecognized argument " arg "."))))))))
     (map define:"sbt" syntax:"e1" as:sbt-handler))
 
 (let ((map (ViMap normalMap))
