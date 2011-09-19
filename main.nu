@@ -73,7 +73,7 @@
 (let ((map (ViMap normalMap))
       (single-commands '("sj" "jetty-run"
                          "ss" "jetty-stop"))
-      (continous-commands '("sp" "prepare-webapp")
+      (continuous-commands '("sp" "prepare-webapp")
                            ("sr" "jetty-restart")))
   (single-commands eachPair:(do (shortcut command)
     (let ((shortcut (+ "," shortcut))
