@@ -58,7 +58,7 @@
         (do (ex-command)
           (let (arg (ex-command arg))
             (case (ex-command arg)
-              (nil (start-sbt)j
+              (nil (start-sbt))
               ("start" (start-sbt))
               ("stop" (stop-sbt))
               ("jetty-stop" ((tell-sbt) jettyStop))
@@ -67,7 +67,7 @@
               ("prepare-webapp" ((tell-sbt) prepareWebapp:NO)
               ("~jetty-restart" ((tell-sbt) jettyRestart:YES))
               ("~prepare-webapp" ((tell-sbt) prepareWebapp:YES))
-              (else (ex-command message:(+ "Unrecognized argument " arg "."))))))))
+              (else (ex-command message:(+ "Unrecognized argument " arg ".")))))))))
     (map define:"sbt" syntax:"e1" as:sbt-handler))
 
 (let ((map (ViMap normalMap))
