@@ -64,7 +64,7 @@
               ("jetty-stop" ((tell-sbt) jettyStop))
               ("jetty-run" ((tell-sbt) jettyRun))
               ("jetty-restart" ((tell-sbt) jettyRestart:NO))
-              ("prepare-webapp" ((tell-sbt) prepareWebapp:NO)
+              ("prepare-webapp" ((tell-sbt) prepareWebapp:NO))
               ("~jetty-restart" ((tell-sbt) jettyRestart:YES))
               ("~prepare-webapp" ((tell-sbt) prepareWebapp:YES))
               (else (ex-command message:(+ "Unrecognized argument " arg ".")))))))))
@@ -73,8 +73,8 @@
 (let ((map (ViMap normalMap))
       (single-commands '("sj" "jetty-run"
                          "ss" "jetty-stop"))
-      (continuous-commands '("sp" "prepare-webapp")
-                           ("sr" "jetty-restart")))
+      (continuous-commands '("sp" "prepare-webapp"
+                             "sr" "jetty-restart")))
   (single-commands eachPair:(do (shortcut command)
     (let ((shortcut (+ "," shortcut))
           (command (+ "<esc>:sbt " command "<cr>")))
