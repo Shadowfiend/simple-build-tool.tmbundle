@@ -5,7 +5,9 @@
     (((SbtTask) alloc) init))
 
   (- init is
-    (super initWithBufferName:"*sbt-buffer*" launchPath:"/usr/local/bin/sbt" isShellScript:YES)
+    (let (defined-sbt (((current-text) environment) objectForKey:"SBT_PATH"))
+      (let (sbt-path (if (!= defined-sbt nil) defined-sbt (else "/usr/local/bin/sbt")))
+        (super initWithBufferName:"*sbt-buffer*" launchPath:sbt-path isShellScript:YES)))
 
     self)
     
@@ -44,7 +46,6 @@
 
 (function quit-sbt ()
   ($running-sbt exit)
-  (puts ($running-sbt instanceMethodNames))
   (set $running-sbt nil))
 
 (function tell-sbt ()
