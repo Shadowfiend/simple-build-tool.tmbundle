@@ -22,6 +22,9 @@ Things Implemented
 
   sp and sr can be preceded by an r (,rsr, ,rsp) to run the continuous version
   (~prepare-webapp, ~jetty-restart).
+* The default path of the sbt binary is /usr/local/bin/sbt; however, you can
+  change this by setting up the SBT_PATH environment variable. I use it to
+  point to the JRebel version of my sbt.
 
 Future
 ------
