@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+  <key>name</key>
+  <string>Embedded Simple Build Tool</string>
+  <key>ordering</key>
+  <array>
+    <string>B8FF568E-8A49-4719-80B6-7A151FA51E7C</string>
+  </array>
   <key>contactEmailRot13</key>
   <string>fnirqsnfgpbby+ivpb@tznvy.pbz</string>
   <key>contactName</key>
