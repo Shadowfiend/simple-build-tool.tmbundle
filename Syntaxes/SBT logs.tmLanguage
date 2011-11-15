@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array/>
+	<key>name</key>
+	<string>SBT logs</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>begin</key>
+			<string>^\[</string>
+			<key>end</key>
+			<string>\]</string>
+			<key>name</key>
+			<string>keyword</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>error</string>
+					<key>name</key>
+					<string>invalid.illegal.error-text</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>warn</string>
+					<key>name</key>
+					<string>invalid.deprecated.warn-text</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>==</string>
+			<key>end</key>
+			<string>==</string>
+			<key>name</key>
+			<string>entity.info-readout</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>^\d{2}:\d{2}:\d{2}\.\d{3} </string>
+			<key>name</key>
+			<string>support.timestamp</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(\/[^:]+(?=:))</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.filename</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>$</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>(?&lt;=:)\d+(?=:)</string>
+					<key>name</key>
+					<string>keyword.line-no</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?&lt;=: ).*$</string>
+					<key>name</key>
+					<string>invalid.illegal.error</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>    \^(?=\s*$)</string>
+			<key>name</key>
+			<string>constant.indicator</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>source.scala</string>
+			<key>match</key>
+			<string>    .*$</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.sbt-logs</string>
+	<key>uuid</key>
+	<string>B8FF568E-8A49-4719-80B6-7A151FA51E7C</string>
+</dict>
+</plist>
