@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
   <key>comment</key>
-  <string></sring>
+  <string></string>
 	<key>fileTypes</key>
   <array>
     <string>*sbt-buffer*</string>
