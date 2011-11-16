@@ -2,97 +2,230 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>comment</key>
-  <string></string>
 	<key>fileTypes</key>
-  <array>
-    <string>*sbt-buffer*</string>
-  </array>
+	<array>
+		<string>*sbt-buffer*</string>
+	</array>
 	<key>name</key>
 	<string>SBT logs</string>
 	<key>patterns</key>
 	<array>
 		<dict>
 			<key>begin</key>
-			<string>^\[</string>
+			<string>^(\[(error)\])</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.error-text</string>
+				</dict>
+			</dict>
 			<key>end</key>
-			<string>\]</string>
+			<string>^(?!\[error)|^(?=[^\[])</string>
 			<key>name</key>
-			<string>keyword</string>
+			<string>keyword.log-block.error</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>match</key>
-					<string>error</string>
+					<string>(?&lt;=\[)error(?=\])</string>
 					<key>name</key>
 					<string>invalid.illegal.error-text</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>warn</string>
+					<string>^\d{2}:\d{2}:\d{2}\.\d{3} </string>
 					<key>name</key>
-					<string>invalid.deprecated.warn-text</string>
+					<string>support.timestamp</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(\/[^:]+)(:)(\d+)(:)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>entity.filename</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>source</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.line-no</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>normal</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>([^ ]+ error found)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.error-count</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>text</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>(?&lt;=\[)error(?=\])</string>
+							<key>name</key>
+							<string>invalid.illegal.error-text</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>(?&lt;=:)\d+(?=:)</string>
+							<key>name</key>
+							<string>keyword.line-no</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>(?&lt;=\d: ).*$</string>
+							<key>name</key>
+							<string>invalid.illegal.error</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>(?&lt;=\])\s+\^</string>
+							<key>name</key>
+							<string>constant</string>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>(?&lt;=\])     (?!\^)</string>
+							<key>end</key>
+							<string>$</string>
+							<key>name</key>
+							<string>source</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>source.scala</string>
+									<key>match</key>
+									<string>^.*$</string>
+								</dict>
+							</array>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>==</string>
-			<key>end</key>
-			<string>==</string>
-			<key>name</key>
-			<string>entity.info-readout</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>^\d{2}:\d{2}:\d{2}\.\d{3} </string>
-			<key>name</key>
-			<string>support.timestamp</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>(\/[^:]+(?=:))</string>
+			<string>^(\[([^]]+)\])</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>entity.filename</string>
+					<string>keyword</string>
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>$</string>
+			<string>^(?!\[$2)|^(?=[^\[])</string>
+			<key>name</key>
+			<string>keyword.log-block.non-error</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(?&lt;=:)\d+(?=:)</string>
+					<string>(?&lt;=\[)warn(?=\])</string>
 					<key>name</key>
-					<string>keyword.line-no</string>
+					<string>invalid.deprecated.warn-text</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?&lt;=: ).*$</string>
+					<string>(?&lt;=\[)success(?=\])</string>
 					<key>name</key>
-					<string>invalid.illegal.error</string>
+					<string>string.success-text</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>==</string>
+					<key>end</key>
+					<string>==</string>
+					<key>name</key>
+					<string>entity.info-readout</string>
 				</dict>
 			</array>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>    \^(?=\s*$)</string>
+			<key>begin</key>
+			<string>^(\d{2}:\d{2}:\d{2}.\d{3})</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.timestamp</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>^(?=\[|[0-9][0-9]\.)</string>
 			<key>name</key>
-			<string>constant.indicator</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>source.scala</string>
-			<key>match</key>
-			<string>    .*$</string>
+			<string>log-line</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\d{2}:\d{2}:\d{2}.\d{3}</string>
+					<key>name</key>
+					<string>support.timestamp</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?&lt;= \[)[^]]+(?=\])</string>
+					<key>name</key>
+					<string>storage.thread</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>ERROR</string>
+					<key>name</key>
+					<string>invalid.illegal.error-log</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>DEBUG|INFO</string>
+					<key>name</key>
+					<string>variable.non-error-log</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>AJAX (Request|Response): [^ ]+ </string>
+					<key>end</key>
+					<string>^(?=\d)</string>
+					<key>name</key>
+					<string>ajax-log</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>.*</string>
+							<key>name</key>
+							<string>string.ajax-log</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
 		</dict>
 	</array>
 	<key>scopeName</key>
-	<string>source.sbt-logs</string>
+	<string>source.sbt.logs</string>
 	<key>uuid</key>
 	<string>B8FF568E-8A49-4719-80B6-7A151FA51E7C</string>
 </dict>
